@@ -9,6 +9,11 @@ public class Range
     public int ColumnCount { get; private set; }
     public int RowCount { get; private set; }
 
+    public bool IsSingleLine => ColumnCount == 1 || RowCount == 1;
+    public bool IsSingleCell => ColumnCount == 1 && RowCount == 1;
+    
+    public RangeDirection GrowDirection => ColumnCount > RowCount ? RangeDirection.Right : RangeDirection.Down;   
+    
     private Range(string address)
     {
         var processedAddress = address;
@@ -44,18 +49,18 @@ public class Range
         Normalize();
     }
 
-    public void Reallocate(ReallocateDirection direction, int count)
+    public void Reallocate(RangeDirection direction, int count)
     {
         var growthPoint = direction switch
         {
-            ReallocateDirection.Up => UpperLeft.Row.NumericPosition,
-            ReallocateDirection.Left => UpperLeft.Column.NumericPosition,
-            ReallocateDirection.Down => BottomRight.Row.NumericPosition,
-            ReallocateDirection.Right => BottomRight.Column.NumericPosition,
+            RangeDirection.Up => UpperLeft.Row.NumericPosition,
+            RangeDirection.Left => UpperLeft.Column.NumericPosition,
+            RangeDirection.Down => BottomRight.Row.NumericPosition,
+            RangeDirection.Right => BottomRight.Column.NumericPosition,
             _ => throw new ArgumentOutOfRangeException(nameof(direction), direction, "Unknown direction.")
         };
 
-        var adjustedCount = direction == ReallocateDirection.Up || direction == ReallocateDirection.Left
+        var adjustedCount = direction == RangeDirection.Up || direction == RangeDirection.Left
             ? -count
             : count;
             
@@ -66,16 +71,16 @@ public class Range
 
         switch (direction)
         {
-            case ReallocateDirection.Up:
+            case RangeDirection.Up:
                 UpperLeft = new Address(UpperLeft.Column.ReferencePosition + UpperLeft.Row.Move(adjustedCount).ReferencePosition);
                 break;
-            case ReallocateDirection.Left:
+            case RangeDirection.Left:
                 UpperLeft = new Address(UpperLeft.Column.Move(adjustedCount).ReferencePosition + UpperLeft.Row.ReferencePosition);
                 break;
-            case ReallocateDirection.Down:
+            case RangeDirection.Down:
                 BottomRight = new Address(BottomRight.Column.ReferencePosition + BottomRight.Row.Move(adjustedCount).ReferencePosition);
                 break;
-            case ReallocateDirection.Right:
+            case RangeDirection.Right:
                 BottomRight = new Address(BottomRight.Column.Move(adjustedCount).ReferencePosition + BottomRight.Row.ReferencePosition);
                 break;
             default:
@@ -129,7 +134,7 @@ public class Range
     #endregion
 }
 
-public enum ReallocateDirection
+public enum RangeDirection
 {
     Up,
     Down,
