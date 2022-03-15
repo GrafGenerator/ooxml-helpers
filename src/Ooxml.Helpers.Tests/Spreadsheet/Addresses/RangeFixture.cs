@@ -111,4 +111,22 @@ public class RangeFixture: FixtureBase
         Action act = () => Range.FromString(address);
         act.Should().Throw<Exception>();
     }
+    
+    [TestCase("A1:F7", ExpectedResult = "A1:F7")]
+    [TestCase("$A$1:$F$7", ExpectedResult = "$A$1:$F$7")]
+    [TestCase("List1!A1:F7", ExpectedResult = "List1!A1:F7")]
+    [TestCase("List1!$A$1:$F$7", ExpectedResult = "List1!$A$1:$F$7")]
+    public string RangeReferenceCases(string address)
+    {
+        return Range.FromString(address).Reference;
+    }
+    
+    [TestCase("A1:F7", ExpectedResult = "A1:F7")]
+    [TestCase("$A$1:$F$7", ExpectedResult = "A1:F7")]
+    [TestCase("List1!A1:F7", ExpectedResult = "List1!A1:F7")]
+    [TestCase("List1!$A$1:$F$7", ExpectedResult = "List1!A1:F7")]
+    public string RangeCleanReferenceCases(string address)
+    {
+        return Range.FromString(address).CleanReference;
+    }
 }

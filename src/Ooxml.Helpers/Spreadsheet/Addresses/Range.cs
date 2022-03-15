@@ -13,6 +13,8 @@ public class Range
     public bool IsSingleCell => ColumnCount == 1 && RowCount == 1;
     
     public SheetDirection GrowDirection => ColumnCount > RowCount ? SheetDirection.Right : SheetDirection.Down;   
+    public string Reference => $"{List}{(string.IsNullOrEmpty(List) ? "" : "!")}{UpperLeft.Reference}:{BottomRight.Reference}";   
+    public string CleanReference => $"{List}{(string.IsNullOrEmpty(List) ? "" : "!")}{UpperLeft.CleanReference}:{BottomRight.CleanReference}";   
     
     private Range(string address)
     {
@@ -132,12 +134,4 @@ public class Range
     }
 
     #endregion
-}
-
-public enum SheetDirection
-{
-    Up,
-    Down,
-    Left,
-    Right
 }
