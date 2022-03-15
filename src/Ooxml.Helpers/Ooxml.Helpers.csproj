@@ -14,7 +14,7 @@
         <RepositoryUrl>https://github.com/GrafGenerator/ooxml-helpers</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
         <PackageLicenseUrl>https://github.com/GrafGenerator/ooxml-helpers/blob/master/LICENSE</PackageLicenseUrl>
-        <PackageVersion>1.0.1</PackageVersion>
+        <PackageVersion>1.0.2</PackageVersion>
     </PropertyGroup>
 
 </Project>

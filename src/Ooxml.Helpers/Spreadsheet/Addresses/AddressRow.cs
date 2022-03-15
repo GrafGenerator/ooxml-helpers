@@ -51,7 +51,7 @@ public class AddressRow
         NumericPosition = numericValue;
     }
 
-    public AddressRow Move(int count) => new AddressRow(NumericPosition + count, IsFixed);
+    public AddressRow Move(int count) => new(NumericPosition + count, IsFixed);
 
     public string ReferencePosition { get; }
 

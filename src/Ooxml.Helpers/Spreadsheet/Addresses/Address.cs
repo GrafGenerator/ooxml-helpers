@@ -4,6 +4,12 @@ public class Address
 {
     private static readonly char[] Digits = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
 
+    private Address(AddressColumn column, AddressRow row)
+    {
+        Column = column;
+        Row = row;
+    }
+    
     public Address(string address)
     {
         var firstDigitIndex = address.IndexOfAny(Digits);
@@ -18,6 +24,16 @@ public class Address
 
     public AddressRow Row { get; }
     public AddressColumn Column { get; }
+
+    public Address Adjacent(SheetDirection direction) =>
+        direction switch
+        {
+            SheetDirection.Up => new Address(Column, Row.Move(-1)),
+            SheetDirection.Down => new Address(Column, Row.Move(1)),
+            SheetDirection.Left => new Address(Column.Move(-1), Row),
+            SheetDirection.Right => new Address(Column.Move(1), Row),
+            _ => throw new ArgumentOutOfRangeException(nameof(direction), direction, null)
+        };
 
     #region Equality members
 

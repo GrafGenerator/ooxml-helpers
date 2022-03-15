@@ -58,23 +58,23 @@ public class RangeFixture: FixtureBase
         return $"{range.List},{range.UpperLeft.Column.ReferencePosition},{range.UpperLeft.Row.ReferencePosition},{range.BottomRight.Column.ReferencePosition},{range.BottomRight.Row.ReferencePosition}";
     }
         
-    [TestCase("D4:F7", RangeDirection.Up, -1, ExpectedResult = "D5:F7")]
-    [TestCase("D4:F7", RangeDirection.Up, 1, ExpectedResult = "D3:F7")]
-    [TestCase("D4:F7", RangeDirection.Left, -1, ExpectedResult = "E4:F7")]
-    [TestCase("D4:F7", RangeDirection.Left, 1, ExpectedResult = "C4:F7")]
-    [TestCase("D4:F7", RangeDirection.Down, -1, ExpectedResult = "D4:F6")]
-    [TestCase("D4:F7", RangeDirection.Down, 1, ExpectedResult = "D4:F8")]
-    [TestCase("D4:F7", RangeDirection.Right, -1, ExpectedResult = "D4:E7")]
-    [TestCase("D4:F7", RangeDirection.Right, 1, ExpectedResult = "D4:G7")]
-    [TestCase("$D$4:$F$7", RangeDirection.Up, -1, ExpectedResult = "$D$5:$F$7")]
-    [TestCase("$D$4:$F$7", RangeDirection.Up, 1, ExpectedResult = "$D$3:$F$7")]
-    [TestCase("$D$4:$F$7", RangeDirection.Left, -1, ExpectedResult = "$E$4:$F$7")]
-    [TestCase("$D$4:$F$7", RangeDirection.Left, 1, ExpectedResult = "$C$4:$F$7")]
-    [TestCase("$D$4:$F$7", RangeDirection.Down, -1, ExpectedResult = "$D$4:$F$6")]
-    [TestCase("$D$4:$F$7", RangeDirection.Down, 1, ExpectedResult = "$D$4:$F$8")]
-    [TestCase("$D$4:$F$7", RangeDirection.Right, -1, ExpectedResult = "$D$4:$E$7")]
-    [TestCase("$D$4:$F$7", RangeDirection.Right, 1, ExpectedResult = "$D$4:$G$7")]
-    public string RangeReallocateCases(string address, RangeDirection direction, int count)
+    [TestCase("D4:F7", SheetDirection.Up, -1, ExpectedResult = "D5:F7")]
+    [TestCase("D4:F7", SheetDirection.Up, 1, ExpectedResult = "D3:F7")]
+    [TestCase("D4:F7", SheetDirection.Left, -1, ExpectedResult = "E4:F7")]
+    [TestCase("D4:F7", SheetDirection.Left, 1, ExpectedResult = "C4:F7")]
+    [TestCase("D4:F7", SheetDirection.Down, -1, ExpectedResult = "D4:F6")]
+    [TestCase("D4:F7", SheetDirection.Down, 1, ExpectedResult = "D4:F8")]
+    [TestCase("D4:F7", SheetDirection.Right, -1, ExpectedResult = "D4:E7")]
+    [TestCase("D4:F7", SheetDirection.Right, 1, ExpectedResult = "D4:G7")]
+    [TestCase("$D$4:$F$7", SheetDirection.Up, -1, ExpectedResult = "$D$5:$F$7")]
+    [TestCase("$D$4:$F$7", SheetDirection.Up, 1, ExpectedResult = "$D$3:$F$7")]
+    [TestCase("$D$4:$F$7", SheetDirection.Left, -1, ExpectedResult = "$E$4:$F$7")]
+    [TestCase("$D$4:$F$7", SheetDirection.Left, 1, ExpectedResult = "$C$4:$F$7")]
+    [TestCase("$D$4:$F$7", SheetDirection.Down, -1, ExpectedResult = "$D$4:$F$6")]
+    [TestCase("$D$4:$F$7", SheetDirection.Down, 1, ExpectedResult = "$D$4:$F$8")]
+    [TestCase("$D$4:$F$7", SheetDirection.Right, -1, ExpectedResult = "$D$4:$E$7")]
+    [TestCase("$D$4:$F$7", SheetDirection.Right, 1, ExpectedResult = "$D$4:$G$7")]
+    public string RangeReallocateCases(string address, SheetDirection direction, int count)
     {
         var range = Range.FromString(address);
         range.Reallocate(direction, count);
@@ -87,13 +87,13 @@ public class RangeFixture: FixtureBase
         Check<ArgumentOutOfRangeException>(() =>
         {
             var range = Range.FromString("A1:C3");
-            range.Reallocate(RangeDirection.Up, 1);
+            range.Reallocate(SheetDirection.Up, 1);
         });
             
         Check<ArgumentOutOfRangeException>(() =>
         {
             var range = Range.FromString("A1:C3");
-            range.Reallocate(RangeDirection.Left, 1);
+            range.Reallocate(SheetDirection.Left, 1);
         });
     }
         

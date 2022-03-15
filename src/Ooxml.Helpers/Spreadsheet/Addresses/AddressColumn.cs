@@ -74,7 +74,7 @@ public class AddressColumn
         NumericPosition = result + 1;
     }
 
-    public AddressColumn Move(int count) => new AddressColumn(NumericPosition + count, IsFixed);
+    public AddressColumn Move(int count) => new(NumericPosition + count, IsFixed);
 
     public string ReferencePosition { get; }
 
