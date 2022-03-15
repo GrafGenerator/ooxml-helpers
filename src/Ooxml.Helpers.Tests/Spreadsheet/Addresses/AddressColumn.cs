@@ -88,7 +88,14 @@ public class AddressColumn: FixtureBase
         var column = new Helpers.Spreadsheet.Addresses.AddressColumn(reference).Move(shift);
         return $"{column.NumericPosition},{(column.IsFixed ? "f" : "nf")}";
     }
-        
+
+    [TestCase("A", ExpectedResult = "A")]
+    [TestCase("$A", ExpectedResult = "A")]
+    public string ColumnCleanReferencePositionCases(string position)
+    {
+        return new Helpers.Spreadsheet.Addresses.AddressColumn(position).CleanReferencePosition;
+    }
+    
     [Test]
     public void ColumnExceptionalCases()
     {

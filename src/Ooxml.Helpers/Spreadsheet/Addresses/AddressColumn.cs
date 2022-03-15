@@ -71,12 +71,21 @@ public class AddressColumn
         }
 
         ReferencePosition = referencePosition.ToUpper();
+        CleanReferencePosition = prepared;
         NumericPosition = result + 1;
     }
 
     public AddressColumn Move(int count) => new(NumericPosition + count, IsFixed);
 
+    /// <summary>
+    /// String representation of column position with possible $ mark
+    /// </summary>
     public string ReferencePosition { get; }
+    
+    /// <summary>
+    /// String representation of column position without possible $ mark
+    /// </summary>
+    public string CleanReferencePosition { get; }
 
     /// <summary>
     ///     1-based column numeric position

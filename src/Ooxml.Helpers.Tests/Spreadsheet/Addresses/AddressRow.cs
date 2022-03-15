@@ -66,7 +66,14 @@ public class AddressRow: FixtureBase
         var row = new Helpers.Spreadsheet.Addresses.AddressRow(position).Move(shift);
         return $"{row.NumericPosition},{(row.IsFixed ? "f" : "nf")}";
     }
-        
+
+    [TestCase("1", ExpectedResult = "1")]
+    [TestCase("$1", ExpectedResult = "1")]
+    public string RowCleanReferencePositionCases(string reference)
+    {
+        return new Helpers.Spreadsheet.Addresses.AddressRow(reference).CleanReferencePosition;
+    }
+    
     [Test]
     public void RowReferenceExceptionalCases()
     {

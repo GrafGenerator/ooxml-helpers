@@ -52,4 +52,22 @@ public class Address: FixtureBase
     {
         Check<Exception>(() => new Helpers.Spreadsheet.Addresses.Address(reference).Adjacent(direction));
     }
+    
+    [TestCase("A1", ExpectedResult = "A1")]
+    [TestCase("$A1", ExpectedResult = "$A1")]
+    [TestCase("A$1", ExpectedResult = "A$1")]
+    [TestCase("$A$1", ExpectedResult = "$A$1")]
+    public string AddressReferenceCases(string reference)
+    {
+        return new Helpers.Spreadsheet.Addresses.Address(reference).Reference;
+    }
+    
+    [TestCase("A1", ExpectedResult = "A1")]
+    [TestCase("$A1", ExpectedResult = "A1")]
+    [TestCase("A$1", ExpectedResult = "A1")]
+    [TestCase("$A$1", ExpectedResult = "A1")]
+    public string AddressCleanReferenceCases(string reference)
+    {
+        return new Helpers.Spreadsheet.Addresses.Address(reference).CleanReference;
+    }
 }

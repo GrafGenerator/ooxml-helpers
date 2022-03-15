@@ -48,12 +48,21 @@ public class AddressRow
         }
             
         ReferencePosition = referencePosition;
+        CleanReferencePosition = position;
         NumericPosition = numericValue;
     }
 
     public AddressRow Move(int count) => new(NumericPosition + count, IsFixed);
 
+    /// <summary>
+    /// String representation of row position with possible $ mark
+    /// </summary>
     public string ReferencePosition { get; }
+    
+    /// <summary>
+    /// String representation of row position without possible $ mark
+    /// </summary>
+    public string CleanReferencePosition { get; }
 
     /// <summary>
     ///     Row numeric position (start from 1)

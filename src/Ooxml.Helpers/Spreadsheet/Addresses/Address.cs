@@ -3,6 +3,8 @@ namespace Ooxml.Helpers.Spreadsheet.Addresses;
 public class Address
 {
     private static readonly char[] Digits = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
+    private string? _reference;
+    private string? _cleanReference;
 
     private Address(AddressColumn column, AddressRow row)
     {
@@ -24,6 +26,9 @@ public class Address
 
     public AddressRow Row { get; }
     public AddressColumn Column { get; }
+
+    public string Reference => _reference ??= Column.ReferencePosition + Row.ReferencePosition;
+    public string CleanReference => _cleanReference ??= Column.CleanReferencePosition + Row.CleanReferencePosition;
 
     public Address Adjacent(SheetDirection direction) =>
         direction switch
