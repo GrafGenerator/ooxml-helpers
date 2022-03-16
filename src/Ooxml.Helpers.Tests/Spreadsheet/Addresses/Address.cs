@@ -38,10 +38,22 @@ public class Address: FixtureBase
     [TestCase("$C$3", SheetDirection.Down, ExpectedResult = "$C$4")]
     [TestCase("$C$3", SheetDirection.Left, ExpectedResult = "$B$3")]
     [TestCase("$C$3", SheetDirection.Right, ExpectedResult = "$D$3")]
-    public string AddressAdjacentCases(string reference, SheetDirection direction)
+    public string AddressAdjacentReferenceCases(string reference, SheetDirection direction)
     {
-        var address = new Helpers.Spreadsheet.Addresses.Address(reference).Adjacent(direction);
-        return $"{address.Column.ReferencePosition}{address.Row.ReferencePosition}";
+        return new Helpers.Spreadsheet.Addresses.Address(reference).Adjacent(direction).Reference;
+    }
+    
+    [TestCase("C3", SheetDirection.Up, ExpectedResult = "C2")]
+    [TestCase("C3", SheetDirection.Down, ExpectedResult = "C4")]
+    [TestCase("C3", SheetDirection.Left, ExpectedResult = "B3")]
+    [TestCase("C3", SheetDirection.Right, ExpectedResult = "D3")]
+    [TestCase("$C$3", SheetDirection.Up, ExpectedResult = "C2")]
+    [TestCase("$C$3", SheetDirection.Down, ExpectedResult = "C4")]
+    [TestCase("$C$3", SheetDirection.Left, ExpectedResult = "B3")]
+    [TestCase("$C$3", SheetDirection.Right, ExpectedResult = "D3")]
+    public string AddressAdjacentCleanReferenceCases(string reference, SheetDirection direction)
+    {
+        return new Helpers.Spreadsheet.Addresses.Address(reference).Adjacent(direction).CleanReference;
     }
     
     [TestCase("A1", SheetDirection.Up)]

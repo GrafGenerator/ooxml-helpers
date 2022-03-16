@@ -15,6 +15,7 @@ public class AddressRow
 
         NumericPosition = numericPosition;
         ReferencePosition = (isFixed ? "$" : "") + NumericPosition;
+        CleanReferencePosition = NumericPosition.ToString();
         IsFixed = isFixed;
     }
         

@@ -32,6 +32,7 @@ public class AddressColumn
         } while (tmp > 0);
             
         ReferencePosition = (isFixed ? "$" : "") + result;
+        CleanReferencePosition = result;
         NumericPosition = numericPosition;
         IsFixed = isFixed;
     }

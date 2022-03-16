@@ -36,10 +36,10 @@ public class Address
     public Address Adjacent(SheetDirection direction) =>
         direction switch
         {
-            SheetDirection.Up => new Address(Column, Row.Move(-1)),
-            SheetDirection.Down => new Address(Column, Row.Move(1)),
-            SheetDirection.Left => new Address(Column.Move(-1), Row),
-            SheetDirection.Right => new Address(Column.Move(1), Row),
+            SheetDirection.Up => new Address(Column.Move(0), Row.Move(-1)),
+            SheetDirection.Down => new Address(Column.Move(0), Row.Move(1)),
+            SheetDirection.Left => new Address(Column.Move(-1), Row.Move(0)),
+            SheetDirection.Right => new Address(Column.Move(1), Row.Move(0)),
             _ => throw new ArgumentOutOfRangeException(nameof(direction), direction, null)
         };
 
