@@ -1,5 +1,8 @@
+using System.Diagnostics;
+
 namespace Ooxml.Helpers.Spreadsheet.Addresses;
 
+[DebuggerDisplay("{ReferencePosition} ({NumericPosition})")]
 public class AddressRow
 {
     public AddressRow(int numericPosition, bool isFixed = false)

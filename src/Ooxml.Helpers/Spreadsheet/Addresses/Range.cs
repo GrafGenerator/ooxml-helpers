@@ -1,5 +1,8 @@
+using System.Diagnostics;
+
 namespace Ooxml.Helpers.Spreadsheet.Addresses;
 
+[DebuggerDisplay("{Reference}")]
 public class Range
 {
     public string List { get; }
